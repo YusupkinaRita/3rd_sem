@@ -21,13 +21,14 @@ Array_handler(int size=10){
 }
 void Append_array(int new_elem){
     if(_count==_size){
-    _size=_size*2;
+    _size=_size*5;
     int* temp_arr=new int[_size];
     std::memcpy(temp_arr,_array,_size*sizeof(int));
     delete[] _array;
     _array=temp_arr;
     }
     _array[_count]=new_elem;
+
     if(_array[_count]>_max)
     _max=_array[_count];
     if(_array[_count]<_min)
