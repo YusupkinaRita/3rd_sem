@@ -2,24 +2,55 @@
 #include <cstring>
 #include <chrono>
 
+
 enum Gender{male, female};
+
+struct Diagnos{
+std::string description;
+std::string drugs;
+};
 
 class Patient{
 private:
-std::string _name;
-std::string _surname;
-std::string _patronomyc;
-std::chrono::year_month_day _born_date;
-UUID _uuid;
-Gender _gender;
-void Define_gender();
-void Generate_id();
-void Determine_fio(std::string fio);
-std::string _health_problem;
-Diagnos* _diagnos;//description drugs структура
+    std::string _name;
+    std::string _surname;
+    std::string _patronomyc;
+    std::chrono::year_month_day _born_date;
+//UUID _uuid;
+    Gender _gender;
+    void Define_gender(){
+        if(_patronomyc.back()=='a')
+        _gender=female;
+        else _gender=male;
+        
+    };
+    void Generate_id();
+    void Determine_fio(std::string fio){
+        size_t ind1=fio.find(' ');
+        size_t ind2=fio.find(' ',ind1+1);
+        _surname=fio.substr(0,ind1);
+        _name=fio.substr(ind1+1,ind2-ind1-1);
+        _patronomyc=fio.substr(ind2+1);
+
+    };
+    std::string _health_problem;
+    Diagnos* _diagnos;
 public:
-Patient(std::string surname, std::string name, std::string patr,std::chrono::year_month_day born_date);
-Patient(std::string fio, std::chrono::year_month_day born_date);
+    Patient(){
+
+    };
+    Patient(std::string surname, std::string name, std::string patr,std::chrono::year_month_day born_date){
+        _surname=surname;
+        _name=name;
+        _patronomyc=patr;
+        _born_date=born_date;
+        Define_gender();
+    };
+    Patient(std::string fio, std::chrono::year_month_day born_date){
+        Determine_fio(fio);
+        _born_date=born_date;
+        Define_gender();
+    };
 
 
 
