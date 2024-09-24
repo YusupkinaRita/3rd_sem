@@ -7,6 +7,9 @@ class Doctor{
 private:
 
 public:
+Doctor(){
+
+};
 void Next(Patient* pat){
 Check_patient(pat);
 Think(pat->Get_health_problem());

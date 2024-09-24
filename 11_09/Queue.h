@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "Patient.h"
+#include <cstring>
 
 
 
@@ -31,31 +32,95 @@ public:
 
 
     };
-    Patient* Get_next_patient();
+    Patient* Get_next_patient(){
+        if(_top_patient!=nullptr){
+            Patient* temp=_top_patient[0];
+            _cT--;
+            std::memmove(&_top_patient[0],&_top_patient[1], sizeof(Patient*)*_cT);
+            return temp;
+        }
+        else{
+            if(_middle_patient!=nullptr){
+                Patient* temp=_middle_patient[0];
+                _cM--;
+                std::memmove(&_middle_patient[0],&_middle_patient[1], sizeof(Patient*)*_cM);
+                return temp;
+            }
+            else{
+                if(_general_patient!=nullptr){
+                    Patient* temp=_general_patient[0];
+                    _cG--;
+                    std::memmove(&_general_patient[0],&_general_patient[1], sizeof(Patient*)*_cG);
+                    return temp;
+                }
+                else
+                return 0;
+            }
+
+        }
+    }
     void Append_patient(Patient* pat){
         if(pat->Get_estate()==I){
             if(_cT==_sT){
+                if(_cM!=_sM){
+                    std::memmove(&_middle_patient[1],&_middle_patient[0],sizeof(Patient*)*_cM);
+                    _middle_patient[0]=pat;
+                    _cM++;
+                }
+            
 
             }
             else{
+                _top_patient[_cT]=pat;
+                _cT++;
 
             }
 
         }
         if(pat->Get_estate()==II){
             if(_cM==_sM){
+                if(_cG!=_sG){
+                    std::memmove(&_general_patient[1],&_general_patient[0],sizeof(Patient*)*_cG);
+                    _general_patient[0]=pat;
+                    _cG++;
+                }
+                else if(_cT!=_sT){
+                    Patient* temp=_middle_patient[0];
+                    std::memmove(&_middle_patient[0],&_middle_patient[1],sizeof(Patient*)*_cM);
+                    _middle_patient[_cM-1]=pat;
+
+                    _top_patient[_cT]=temp;
+                    _cT++;
+
+                }
+              
+
 
             }
             else{
+                _middle_patient[_cM]=pat;
+                _cM++;
                 
             }
             
         }
         if(pat->Get_estate()==III){
             if(_cG==_sG){
+                if(_cM!=_sM){
+                    Patient* temp=_general_patient[0];
+                    std::memmove(&_general_patient[0], &_general_patient[1],sizeof(Patient*)*_cG);
+                    _general_patient[_cG-1]=pat;
+
+                    _middle_patient[_cM]=temp;
+                    _cM++;
+
+                }
+                
 
             }
             else{
+                _general_patient[_cG]=pat;
+                _cG++;
                 
             }
             
@@ -64,7 +129,11 @@ public:
 
     }
 
-    ~Queue();
+    ~Queue(){
+        delete[] _top_patient;
+        delete[] _middle_patient;
+        delete[] _general_patient;
+    }
 
 
 

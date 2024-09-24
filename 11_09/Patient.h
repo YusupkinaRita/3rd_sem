@@ -42,16 +42,18 @@ public:
     Patient(){
 
     };
-    Patient(std::string surname, std::string name, std::string patr,std::chrono::year_month_day born_date){
+    Patient(std::string surname, std::string name, std::string patr,std::chrono::year_month_day born_date, Estate state){
         _surname=surname;
         _name=name;
         _patronomyc=patr;
         _born_date=born_date;
+        _state=state;
         Define_gender();
     };
-    Patient(std::string fio, std::chrono::year_month_day born_date){
+    Patient(std::string fio, std::chrono::year_month_day born_date, Estate state){
         Determine_fio(fio);
         _born_date=born_date;
+        _state=state;
         Define_gender();
     };
 
