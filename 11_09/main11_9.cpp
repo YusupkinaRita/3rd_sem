@@ -49,10 +49,11 @@ int main(){
         //ввод пациентов
     }
     
-    for(int i=0;i<1;i++){
-        Patient* current=patient_queue.Get_next_patient();
+   for(int i=0;i<1;i++){
+       Patient* current=patient_queue.Get_next_patient();
+       
         doc.Next(current );
-        delete current;
+        //delete current;
     }
 
 

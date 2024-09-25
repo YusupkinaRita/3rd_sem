@@ -17,6 +17,7 @@ Think(pat->Get_health_problem());
 
 };
 void Check_patient(Patient* pat){
+    
     std::cout<<pat->Get_health_problem()<<std::endl;
     
 }

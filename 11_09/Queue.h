@@ -21,15 +21,16 @@ size_t _q_count;
 
 public:
     Queue(){
-        _top_patient=new Patient*[_sT];
-        _middle_patient=new Patient*[_sM];
-        _general_patient=new Patient*[_sG];
         _cT=0;
         _cM=0;
         _cG=0;
         _sT=10;
         _sM=10;
         _sG=10;
+        _top_patient=new Patient*[_sT];
+        _middle_patient=new Patient*[_sM];
+        _general_patient=new Patient*[_sG];
+        
         _q_count=0;
 
 

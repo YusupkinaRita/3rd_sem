@@ -4,6 +4,7 @@
 #include <chrono>
 
 
+
 enum Gender{male, female};
 enum Estate{I, II, III};//первый в первую и тп
 
@@ -64,6 +65,13 @@ public:
     Estate Get_estate(){
         return _state;
 
+    }
+    void Print_patient(){
+        std::cout<<"Name:"<<_name<<std::endl;
+        std::cout<<"Surname:"<<_surname<<std::endl;
+        std::cout<<"Patronomyc:"<<_patronomyc<<std::endl;
+        //std::cout<<"Birthday:"<<_born_date<<std::endl;
+        std::cout<<"Estate:"<<_state<<std::endl;
     }
 
 
