@@ -16,6 +16,7 @@ size_t _sG;
 size_t _cT;
 size_t _cM;
 size_t _cG;
+size_t _q_count;
 
 
 public:
@@ -29,28 +30,33 @@ public:
         _sT=10;
         _sM=10;
         _sG=10;
+        _q_count=0;
 
 
     };
     Patient* Get_next_patient(){
-        if(_top_patient!=nullptr){
-            Patient* temp=_top_patient[0];
-            _cT--;
-            std::memmove(&_top_patient[0],&_top_patient[1], sizeof(Patient*)*_cT);
+        if(_q_count<_cT){
+
+            Patient* temp=_top_patient[_q_count];
+            _q_count++;
+            //_cT--;
+            //std::memmove(&_top_patient[0],&_top_patient[1], sizeof(Patient*)*_cT);
             return temp;
         }
         else{
-            if(_middle_patient!=nullptr){
-                Patient* temp=_middle_patient[0];
-                _cM--;
-                std::memmove(&_middle_patient[0],&_middle_patient[1], sizeof(Patient*)*_cM);
+            if((_q_count-_cT)<_cM){
+                Patient* temp=_middle_patient[_q_count-_cT];
+                _q_count++;
+                //_cM--;
+                //std::memmove(&_middle_patient[0],&_middle_patient[1], sizeof(Patient*)*_cM);
                 return temp;
             }
             else{
-                if(_general_patient!=nullptr){
-                    Patient* temp=_general_patient[0];
-                    _cG--;
-                    std::memmove(&_general_patient[0],&_general_patient[1], sizeof(Patient*)*_cG);
+                if(_q_count-_cT-_cM<_cG){
+                    Patient* temp=_general_patient[_q_count-_cT-_cM];
+                    _q_count++;
+                    //_cG--;
+                    //std::memmove(&_general_patient[0],&_general_patient[1], sizeof(Patient*)*_cG);
                     return temp;
                 }
                 else
